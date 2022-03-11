@@ -7,14 +7,12 @@ class UserModel extends BaseModel {
     public function findUserById($id) {
         $sql = 'SELECT * FROM users WHERE id = '.$id;
         $user = $this->select($sql);
-
         return $user;
     }
 
     public function findUser($keyword) {
         $sql = 'SELECT * FROM users WHERE user_name LIKE %'.$keyword.'%'. ' OR user_email LIKE %'.$keyword.'%';
         $user = $this->select($sql);
-
         return $user;
     }
 
@@ -24,10 +22,9 @@ class UserModel extends BaseModel {
      * @param $password
      * @return array
      */
-    public function auth($userName, $password) {
+    public function auth($userName,$email, $password) {
         $md5Password = md5($password);
-        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" AND password = "'.$md5Password.'"';
-
+        $sql = 'SELECT * FROM users WHERE name = "' . $userName . '" OR email = "'.$email.'" AND password = "'.$md5Password.'"';
         $user = $this->select($sql);
         return $user;
     }

@@ -9,10 +9,11 @@ $userModel = new UserModel();
 if (!empty($_POST['submit'])) {
     $users = [
         'username' => $_POST['username'],
+        'email' => $_POST['email'],
         'password' => $_POST['password']
     ];
     $user = NULL;
-    if ($user = $userModel->auth($users['username'], $users['password'])) {
+    if ($user = $userModel->auth($users['username'],$users['email'], $users['password'])) {
         //Login successful
         $_SESSION['id'] = $user[0]['id'];
 
